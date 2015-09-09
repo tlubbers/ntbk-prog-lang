@@ -1,4 +1,30 @@
-# Week 4
+# Grammar and Parsing
+
+## Left recursion
+
+Recursive Descent Parsers cannot handle left recursion. We identify left recursions in the grammar just by looking at it. See following photo.
+
+![Identifying Left Recursion](./img/wk3_idleftrec.png)
+
+### Removing left recursion
+
+The following diagrams show the process of eliminating left recursion to allow for recursive descent parsing.
+
+![Removing Left Recursion](./img/wk3-rmleftrec.png)
+
+![Removing Left Recursion](./img/wk3-rmleftrec2.png)
+
+### Indirect left-recursions
+
+The following diagram shows an example of indirect left recursion.
+
+![Identifying Indirect Left Recursion](./img/wk3-idindirectrec.png)
+
+### Removing indirect left recursions
+
+The following algorithm will remove indirect left recursion.
+
+![Removing Indirect Left Recursion](wk3-rmindirectrec.png)
 
 ##  Condition for being an LL(1) grammar
 
@@ -28,4 +54,3 @@ To build the table, we must must compute FIRST and FOLLOW sets for the grammar.
 2. If there is a production A → aBb, (where a can be a whole string) then everything in FIRST(b) except for ε is placed in FOLLOW(B).
 3. If there is a production A → aB, then everything in FOLLOW(A) is in FOLLOW(B)
 4. If there is a production A → aBb, where FIRST(b) contains ε, then everything in FOLLOW(A) is in FOLLOW(B)
-
