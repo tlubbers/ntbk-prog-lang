@@ -10,15 +10,15 @@ Recursive Descent Parsers cannot handle left recursion. We identify left recursi
 
 The following diagrams show the process of eliminating left recursion to allow for recursive descent parsing.
 
-![Removing Left Recursion](./img/wk3_rmleftrec.png)
+![Removing Left Recursion](./img/wk3-rmleftrec.png)
 
-![Removing Left Recursion](./img/wk3_rmleftrec2.png)
+![Removing Left Recursion](./img/wk3-rmleftrec2.png)
 
 ### Indirect left-recursions
 
 The following diagram shows an example of indirect left recursion.
 
-![Identifying Indirect Left Recursion](./img/wk3_idindirectrec.png)
+![Identifying Indirect Left Recursion](./img/wk3-idindirectrec.png)
 
 ### Removing indirect left recursions
 
