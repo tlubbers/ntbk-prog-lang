@@ -1,4 +1,9 @@
-# Grammar and Parsing
+# Language Grammar & Parsing Techniques
+
+## Programming Languages
+A programming language is described with its **semantics** and its **syntax**. The semantics tells us what is possible in that programming language. The syntax gives us its structure.
+
+Describing syntax is a much studied topic, and really smart people have narrowed all down to **context free grammars.** Note that context exists in any language, not just programming languages. If I said "I saw a man with a telescope", the context is brain screwy.
 
 ## Left recursion
 
