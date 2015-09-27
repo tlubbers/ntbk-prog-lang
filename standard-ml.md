@@ -19,6 +19,10 @@
 
 So the flesh part doesnt make sense to me, he means that the function is the "skin" or "complexion" of ML. It's what can either ruin or perfect the languages elegance.
 
+## ML Basics
+
+The following code block illustrates the basics of ML, written as actual ML code.
+
 ```sml
 (* Comments in Standard ML begin with (* and end with *).  Comments can be
    nested which means that all (* tags must end with a *) tag.  This comment,
@@ -440,3 +444,8 @@ fun decrement_to_zero r = if !r < 0
 (* To allow returning a value, we can use the semicolon to sequence evaluations *)
 fun decrement_ret x y = (x := !x - 1; y)
 ```
+
+## Further References
+
+[The SML User Guide](http://www.smlnj.org/doc/FAQ/index.html)
+[Extensive Notes of SML](http://www.cs.cornell.edu/riccardo/prog-smlnj/notes-011001.pdf)
