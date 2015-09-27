@@ -1,8 +1,4 @@
 {
     "title": "Programming Language Concepts",
-    "plugins": [
-        "katex",
-        "prism"
-    ],
     "pluginsConfig": {}
 }
