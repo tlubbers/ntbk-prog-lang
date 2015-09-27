@@ -2,7 +2,7 @@
     "title": "Programming Language Concepts",
     "plugins": [
         "katex",
-        "gitbookcode"
+        "prism"
     ],
     "pluginsConfig": {}
 }
