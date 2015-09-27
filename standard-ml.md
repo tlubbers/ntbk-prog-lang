@@ -448,4 +448,5 @@ fun decrement_ret x y = (x := !x - 1; y)
 ## Further References
 
 [The SML User Guide](http://www.smlnj.org/doc/FAQ/index.html)
-[Extensive Notes of SML](http://www.cs.cornell.edu/riccardo/prog-smlnj/notes-011001.pdf)
+
+[Extensive Notes on SML](http://www.cs.cornell.edu/riccardo/prog-smlnj/notes-011001.pdf)
