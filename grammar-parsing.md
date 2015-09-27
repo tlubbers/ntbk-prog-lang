@@ -29,7 +29,7 @@ The following diagram shows an example of indirect left recursion.
 
 The following algorithm will remove indirect left recursion.
 
-![Removing Indirect Left Recursion](gp-rmindirectrec.png)
+![Removing Indirect Left Recursion](./gp-rmindirectrec.png)
 
 ##  Condition for being an LL(1) grammar
 
