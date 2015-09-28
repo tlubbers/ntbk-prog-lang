@@ -447,17 +447,27 @@ fun decrement_ret x y = (x := !x - 1; y)
 
 ## Some more ML Functions
 
+### Quicksort
+
 ```sml
+fun split nil = (nil,nil)
+|   split [a] = ([a],nil)
+|   split (a::b::tail) =
+      let
+        val(x,y) = split (a::tail)
+      in
+        if (a < b) then (x, b::y)
+                   else (b::x, y)
+      end
 
 fun quicksort nil = nil
 |   quicksort [a]=[a]
-|   quicksortr a = 
-        let 
+|   quicksortr a =
+        let
             val (x,y) = split a
-        in 
+        in
             quicksort(x)@quicksort(y)
         end;
-
 ```
 
 ## Further References
