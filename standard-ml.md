@@ -445,6 +445,21 @@ fun decrement_to_zero r = if !r < 0
 fun decrement_ret x y = (x := !x - 1; y)
 ```
 
+## Some more ML Functions
+
+```sml
+
+fun quicksort nil = nil
+|   quicksort [a]=[a]
+|   quicksortr a = 
+        let 
+            val (x,y) = split a
+        in 
+            quicksort(x)@quicksort(y)
+        end;
+
+```
+
 ## Further References
 
 [The SML User Guide](http://www.smlnj.org/doc/FAQ/index.html)
