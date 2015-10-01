@@ -452,6 +452,9 @@ fun decrement_ret x y = (x := !x - 1; y)
 ```sml
 fun split nil = (nil,nil)
 |   split [a] = ([a],nil)
+|   split [a,b] =
+     if (a<=b) then ([a],[b])
+               else ([b],[a])
 |   split (a::b::tail) =
       let
         val(x,y) = split (a::tail)
@@ -469,6 +472,7 @@ fun quicksort nil = nil
             quicksort(x)@quicksort(y)
         end;
 ```
+
 
 ## Further References
 
