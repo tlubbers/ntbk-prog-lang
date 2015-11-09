@@ -234,10 +234,16 @@ Y = [] ;
 No
 ```
 
-```
+```prolog
+%base case
 append([], B, B).
+%recursion
+append([Head|TailA], B, [Head|TailC]) :-
+  append(TailA, B, TailC).
+
 ```
 
+### Other Predicates
 
 ## Example Prolog Problems
 
