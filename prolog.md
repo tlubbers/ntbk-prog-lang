@@ -120,7 +120,7 @@ A rule is a logical assertion:
 
 - An operator is just a predicate for which a special abbreviated syntax is supported
 
-### =
+### The = predicate
 The goal =(X,Y) succeeds if and only if X and Y can be unified:
 
 ```prolog
@@ -140,9 +140,68 @@ X = seth
 Yes
 ```
 
-## Example Prolog Programs
+### Arithmetic
+Predicates +, -, * and / are operators too, with the usual precedence and associativity
+
+```prolog
+?- X = +(1,*(2,3)).
+
+X = 1+2*3 
+
+Yes
+?- X = 1+2*3.
+
+X = 1+2*3 
+
+Yes
+
+```
+Prolog lets you use operator notation, and prints it out that way, but the underlying term is still +(1,*(2,3))
+
+**Will not be evaluated!!**
+
+#### Not Evaluated?
+```prolog
+?- +(X,Y) = 1+2*3.
+
+X = 1
+Y = 2*3 
+
+Yes
+?- 7 = 1+2*3.
+
+No
+
+```
+- The term is still +(1,*(2,3))
+- It is not evaluated
+- There is a way to make Prolog evaluate such terms, but we won’t need it yet
+
+## Lists
+A bit like ML lists
+- The atom [] represents the empty list
+- A predicate . corresponds to ML’s :: operator
+
+```
+ML expression   |   Prolog term
+[]              |   []
+1::[]           |   .(1,[])
+1::2::3::[]     |   .(1,.(2,.(3,[])))
+No equivalent.  |   .(1,.(parent(X,Y),[]))
+
+[]              |   []
+[1]             |   .(1,[])
+[1,2,3]         |   .(1,.(2,.(3,[])))
+[1,parent(X,Y)] |   .(1,.(parent(X,Y),[]))
+
+
+```
 
 Prolog tries rules in the order of their definitions, so put base-case rules and facts first
+
+
+## Example Prolog Problems
+
 
 ```prolog
 % 1.01 (*) Find the last element of a list.
