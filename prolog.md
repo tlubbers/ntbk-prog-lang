@@ -2,6 +2,17 @@
 
 Prolog is a logical language, meaning the core of prolog is the interpretation of logical statements. Prolog is also _declaritive_, which means the program logic is expressed in terms of _relations_, represented as _facts_ and _rules._ A computation is made by prolog by running a _query_ over these relations. This is a bit weird; not very many popular programming languages are declaritive. So yay.
 
+## Terms
+
+Everything in Prolog is built from terms:
+- Prolog programs
+- The data manipulated by Prolog programs
+
+Three kinds of terms:
+- **Constants**: integers, real numbers, atoms
+- **Variables**
+- **Compound terms** (predicates)
+
 ## Facts and Rules
 
 There are two things in prolog, facts and rules. 
@@ -12,12 +23,102 @@ There are two things in prolog, facts and rules.
 
 ### Rules
 
+The following is a predicate rule declaration. 
 ```prolog
 greatgrandparent(GGP,GGC) :-
     parent(GGP,GP),
     parent(GP,P)
     parent(P,GGC).
 ```
+
+Some terminology for the above rule: `greatgrandparent` above is the **head** or predicate. The symbol `:-` is the _if_ and the list of `parent` facts are the _conditions._ 
+
+A rule says how to prove something to prove the head, roe the conditions.
+
+#### Programs with a Rule
+
+A program consists of a list of clauses. A clause is either a fact or a rule and ends with a period. 
+
+Internally there are intermediate _goals_:
+- The first goal is the initial query. 
+- The next goal is what remains to be proved after transforming the first goal using one of the clauses(in this case, the `greatgrandparent` rule) 
+
+
+#### Recursive Rule
+
+X is an ancestor of Y if:
+- Base case: X is a parent of Y.
+- Recursive case: there is some Z such that, Z is a parent of Y, and X is an ancestor of Z.
+
+```prolog
+ancestor(X,Y) :- parent(X,Y).
+
+ancestor(X,Y) :-
+  parent(Z,Y), ancestor(X,Z).
+
+```
+
+## The Overall Syntax
+
+Prolog is a very simple language. Syntactically, it is!
+
+```prolog
+<clause> ::=  <fact> | <rule>
+<fact> ::=  <term> .
+<rule> ::=  <term> :- <termlist> .
+<termlist> ::=  <term> | <term> , <termlist>
+
+<term> ::= <constant> | <variable> | <compound-term>
+<constant> ::= <integer> | <real number> | <atom>
+<compound-term> ::= <atom> ( <termlist> )
+<termlist> ::= <term> | <term> , <termlist>
+
+```
+
+## Procedural and Declaritive Aspects of Prolog
+
+There are two faces to Prolog. It is partially procedural and partially declaritive.
+
+### Procedural
+
+```prolog
+greatgrandparent(GGP,GGC) :- 
+  parent(GGP,GP), parent(GP,P), parent(P,GGC).
+
+```
+
+A rule says how to prove something, i.e., specifies proof procedures for queries
+
+To prove `greatgrandparent(GGP,GGC):`
+- find some GP and P
+- prove `parent(GGP,GP)`
+- prove `parent(GP,P)`
+- prove `parent(P,GGC)`
+
+### Delcaritive
+
+A rule is a logical assertion:
+- For all bindings of GGP, GP, P, and GGC, if `parent(GGP,GP)` and `parent(GP,P)` and `parent(P,GGC)`, then `greatgrandparent(GGP,GGC)`
+- It just makes an assertion:
+
+#### A Declaritve Language 
+
+- Each piece of the program corresponds to a simple mathematical abstraction
+    - Prolog clauses – formulas in first-order logic
+    - ML fun definitions – functions 
+- Many people use declarative as the opposite of imperative, including both logic languages and functional languages
+
+##### Advantadges to Declaritive Languages
+- Imperative languages are doomed to subtle side-effects and interdependencies
+
+- Simpler declarative semantics makes it easier to develop and maintain correct programs
+
+- Higher-level, more like automatic programming: we describe the problem and let the computer solve the program
+
+
+## Example Prolog Programs
+
+Prolog tries rules in the order of their definitions, so put base-case rules and facts first
 
 ```prolog
 % 1.01 (*) Find the last element of a list.
