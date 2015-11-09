@@ -115,6 +115,30 @@ A rule is a logical assertion:
 
 - Higher-level, more like automatic programming: we describe the problem and let the computer solve the program
 
+## Operators 
+- Prolog has some predefined operators (and the ability to define new ones)
+
+- An operator is just a predicate for which a special abbreviated syntax is supported
+
+### =
+The goal =(X,Y) succeeds if and only if X and Y can be unified:
+
+```prolog
+?- =(parent(adam,seth),parent(adam,X)).
+
+X = seth 
+
+Yes
+```
+
+Since  =  is an operator, we can :
+```prolog
+?- parent(adam,seth)=parent(adam,X).
+
+X = seth 
+
+Yes
+```
 
 ## Example Prolog Programs
 
