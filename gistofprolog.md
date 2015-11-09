@@ -1,4 +1,9 @@
-# 99 Prolog Problems
+
+# The Gist of Prolog
+
+Prolog is a logical language, meaning the core of prolog is the interpretation of logical statements. Prolog is also _declaritive_, which means the program logic is expressed in terms of _relations_, represented as _facts_ and _rules._ A computation is made by prolog by running a _query_ over these relations. This is a bit weird; not very many popular programming languages are declaritive. So yay.
+
+## Examples
 
 ```prolog
 % 1.01 (*) Find the last element of a list.
