@@ -184,6 +184,7 @@ A bit like ML lists
 
 ```
 ML expression   |   Prolog term
+
 []              |   []
 1::[]           |   .(1,[])
 1::2::3::[]     |   .(1,.(2,.(3,[])))
@@ -194,6 +195,7 @@ No equivalent.  |   .(1,.(parent(X,Y),[]))
 [1,2,3]         |   .(1,.(2,.(3,[])))
 [1,parent(X,Y)] |   .(1,.(parent(X,Y),[]))
 
+With Tails
 [1|X]           |   .(1,X)
 [1,2|X]         |   .(1,.(2,X)))
 [1,2|[3,4]]     |   same as [1,2,3,4]
@@ -201,6 +203,40 @@ No equivalent.  |   .(1,.(parent(X,Y),[]))
 
 ```
 Prolog tries rules in the order of their definitions, so put base-case rules and facts first
+
+### The `append` Predicate
+
+```prolog
+?- append([1,2],[3,4],Z).
+
+Z = [1, 2, 3, 4] 
+
+Yes
+```
+
+Predefined append(X,Y,Z) succeeds if and only if Z is the result of appending the list Y onto the end of the list X
+
+```prolog
+?- append(X,Y,[1,2,3]).
+
+X = []
+Y = [1, 2, 3] ;
+
+X = [1]
+Y = [2, 3] ;
+
+X = [1, 2]
+Y = [3] ;
+
+X = [1, 2, 3]
+Y = [] ;
+
+No
+```
+
+```
+append([], B, B).
+```
 
 
 ## Example Prolog Problems
