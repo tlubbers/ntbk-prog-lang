@@ -245,6 +245,15 @@ append([Head|TailA], B, [Head|TailC]) :-
 
 ### Other Predicates
 
+`member(X,Y)`
+`select(X,Y,Z)`
+`nth0(X,Y,Z)`
+`length(X,Y)`
+
+- All flexible, like append
+- Queries can contain variables anywhere
+
+
 ## Example Prolog Problems
 
 
