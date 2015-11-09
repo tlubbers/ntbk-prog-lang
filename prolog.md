@@ -194,9 +194,12 @@ No equivalent.  |   .(1,.(parent(X,Y),[]))
 [1,2,3]         |   .(1,.(2,.(3,[])))
 [1,parent(X,Y)] |   .(1,.(parent(X,Y),[]))
 
+[1|X]           |   .(1,X)
+[1,2|X]         |   .(1,.(2,X)))
+[1,2|[3,4]]     |   same as [1,2,3,4]
+
 
 ```
-
 Prolog tries rules in the order of their definitions, so put base-case rules and facts first
 
 
