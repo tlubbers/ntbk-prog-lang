@@ -13,17 +13,60 @@ Three kinds of terms:
 - **Variables**
 - **Compound terms** (predicates)
 
-## Facts and Rules
+## Facts, Rules and Queries
 
-There are two things in prolog, facts and rules. 
+## Facts
 
-### Facts
+There are three constructs in prolog; queries, facts, and rules.
 
-`greatgrandparent(tom, john).`
+Facts are used to state things that are unconditionally true of some situation of interest. For example, we can state that Mia, Jody, and Yolanda are women, that Jody plays air guitar, and that a party is taking place, using the following five facts:
+
+```prolog
+woman(mia).
+woman(jody).
+woman(yolanda).
+playsAirGuitar(jody).
+party.
+```
+
+### Queries
+
+The above collection of facts is actually a prolog program. Simple maybe, but still a program. To use the program, we ask questions, or we "query".
+
+```prolog
+?-  woman(mia).
+?-  playsAirGuitar(jody).
+?-  party.
+?-  rockConcert.
+```
+
+The above queries end up giving the results yes, yes, yes, no.  Notice the last one wasn't defined at all in the original collection of facts. Therefore prolog answers that query with a no, as it should. Also, that collection of facts is referred to as a **knowledge base**. This particular knowledge base has 4 **clauses**. Rules, which are seen in the next section, also count as clauses.
 
 ### Rules
 
-The following is a predicate rule declaration. 
+Here is another knowledge base. This one contains facts as well, but the last three are  rules.
+
+```prolog
+happy(yolanda).
+listens2Music(mia).
+listens2Music(yolanda):-  happy(yolanda).
+playsAirGuitar(mia):-  listens2Music(mia).
+playsAirGuitar(yolanda):-  listens2Music(yolanda).
+```
+Rules state information that is conditionally true of the situation of interest. For example, the first rule says that Yolanda listens to music if she is happy, and the last rule says that Yolanda plays air guitar if she listens to music. More generally, the :- should be read as “if”, or “is implied by”. The part on the left hand side of the :- is called the **head** of the rule, the part on the right hand side is called the **body**. So in general rules say: if the body of the rule is true, then the head of the rule is true too.
+
+### The Keypoint is
+**If a knowledge base contains a rule head  :-  body, and Prolog knows that body follows from the information in the knowledge base, then Prolog can infer head.** This is called modus ponens.
+
+The following example illustrates this point in action.
+
+The query `?-  playsAirGuitar(mia).` returns yes, evem though no explicit `playsAirGuitar(mia).` fact is present in the knowledge base. Since `listensToMusic(mia).` is explicitly declared and a rule exists that states `playsAirGuitar(mia):-  listens2Music(mia).`, prolog can infer that mia plays air guitar.
+
+
+<!--
+### Rules
+
+The following is a predicate rule declaration.
 ```prolog
 greatgrandparent(GGP,GGC) :-
     parent(GGP,GP),
@@ -31,17 +74,17 @@ greatgrandparent(GGP,GGC) :-
     parent(P,GGC).
 ```
 
-Some terminology for the above rule: `greatgrandparent` above is the **head** or predicate. The symbol `:-` is the _if_ and the list of `parent` facts are the _conditions._ 
+Some terminology for the above rule: `greatgrandparent` above is the **head** or predicate. The symbol `:-` is the _if_ and the list of `parent` facts are the _conditions._
 
 A rule says how to prove something to prove the head, roe the conditions.
 
 #### Programs with a Rule
 
-A program consists of a list of clauses. A clause is either a fact or a rule and ends with a period. 
+A program consists of a list of clauses. A clause is either a fact or a rule and ends with a period.
 
 Internally there are intermediate _goals_:
-- The first goal is the initial query. 
-- The next goal is what remains to be proved after transforming the first goal using one of the clauses(in this case, the `greatgrandparent` rule) 
+- The first goal is the initial query.
+- The next goal is what remains to be proved after transforming the first goal using one of the clauses(in this case, the `greatgrandparent` rule)
 
 
 #### Recursive Rule
@@ -82,7 +125,7 @@ There are two faces to Prolog. It is partially procedural and partially declarit
 ### Procedural
 
 ```prolog
-greatgrandparent(GGP,GGC) :- 
+greatgrandparent(GGP,GGC) :-
   parent(GGP,GP), parent(GP,P), parent(P,GGC).
 
 ```
@@ -101,11 +144,11 @@ A rule is a logical assertion:
 - For all bindings of GGP, GP, P, and GGC, if `parent(GGP,GP)` and `parent(GP,P)` and `parent(P,GGC)`, then `greatgrandparent(GGP,GGC)`
 - It just makes an assertion:
 
-#### A Declaritve Language 
+#### A Declaritve Language
 
 - Each piece of the program corresponds to a simple mathematical abstraction
     - Prolog clauses – formulas in first-order logic
-    - ML fun definitions – functions 
+    - ML fun definitions – functions
 - Many people use declarative as the opposite of imperative, including both logic languages and functional languages
 
 ##### Advantadges to Declaritive Languages
@@ -115,7 +158,7 @@ A rule is a logical assertion:
 
 - Higher-level, more like automatic programming: we describe the problem and let the computer solve the program
 
-## Operators 
+## Operators
 - Prolog has some predefined operators (and the ability to define new ones)
 
 - An operator is just a predicate for which a special abbreviated syntax is supported
@@ -126,7 +169,7 @@ The goal =(X,Y) succeeds if and only if X and Y can be unified:
 ```prolog
 ?- =(parent(adam,seth),parent(adam,X)).
 
-X = seth 
+X = seth
 
 Yes
 ```
@@ -135,7 +178,7 @@ Since  =  is an operator, we can :
 ```prolog
 ?- parent(adam,seth)=parent(adam,X).
 
-X = seth 
+X = seth
 
 Yes
 ```
@@ -146,12 +189,12 @@ Predicates +, -, * and / are operators too, with the usual precedence and associ
 ```prolog
 ?- X = +(1,*(2,3)).
 
-X = 1+2*3 
+X = 1+2*3
 
 Yes
 ?- X = 1+2*3.
 
-X = 1+2*3 
+X = 1+2*3
 
 Yes
 
@@ -165,7 +208,7 @@ Prolog lets you use operator notation, and prints it out that way, but the under
 ?- +(X,Y) = 1+2*3.
 
 X = 1
-Y = 2*3 
+Y = 2*3
 
 Yes
 ?- 7 = 1+2*3.
@@ -209,7 +252,7 @@ Prolog tries rules in the order of their definitions, so put base-case rules and
 ```prolog
 ?- append([1,2],[3,4],Z).
 
-Z = [1, 2, 3, 4] 
+Z = [1, 2, 3, 4]
 
 Yes
 ```
@@ -407,3 +450,4 @@ permute(L, R) :- count(C, L), random_elements(L, C, R).
 
 % 1.28 (**) Sorting a list of lists according to length of sublists
 ```
+-->

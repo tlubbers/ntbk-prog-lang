@@ -1,3 +1,4 @@
+
 # Standard ML
 
 ## What's Standard ML?
@@ -7,7 +8,6 @@
 - Edinburgh, 1974, Robin Milner’s group
 - There are a number of dialects
 - We are using Standard ML (SML) but we will just call it ML from the time being
-
 
 ### Professor Li's ML Analogy
 
@@ -430,3 +430,9 @@ val prod = fn : real * real -> real
 [Extensive Notes on SML](http://www.cs.cornell.edu/riccardo/prog-smlnj/notes-011001.pdf)
 
 [A Crash Course on ML, Written in ML](./ml.ml)
+
+## Exam Stuff
+- Prolog Definitions
+- ML Programs Higher Order Programs, such as myMap, myFoldL
+- Cheat Sheet
+- Multiple Choice

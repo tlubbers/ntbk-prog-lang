@@ -4,4 +4,4 @@
 * [Grammar and Parsing](grammar-parsing.md)
 * [Standard ML](standard-ml.md)
 * [Prolog](prolog.md)
-
+* [Program Verification](verification.md)
