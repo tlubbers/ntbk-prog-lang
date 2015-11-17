@@ -423,6 +423,134 @@ The above function shows that `int` is the type inferred by default when the the
 val prod = fn : real * real -> real
 ```
 
+## Beyond the Basics of ML
+
+### Patterns
+Consider the following functions..
+
+```sml
+fun f n = n*n;
+fun g (a,b) = a*b;
+```
+Both `n`, and `(a,b)` are considered patterns. `n` is an integer pattern and `(a,b)` is a tuple pattern.
+
+#### The `_` pattern
+We can use the `_` symbol as a wildcard (matches anything) when defining patterns.
+
+```sml
+- fun f _ = "yes";
+val f = fn : 'a -> string
+- f 34.5;
+val it = "yes" : string
+- f [];
+val it = "yes" : string
+```
+
+The underscore can matach anything, but it does not bind to a variable.
+
+#### Constants and Patterns
+
+Any constant of an equality type can be used as a pattern. Notice this means reals cannot be used in pattern matching.
+
+#### Multiple Patterns in Functions
+We can define a function that matches multiple patterns, performing operations based on the pattern received. WE do this using the `|` symbol, as shown below.
+
+```sml
+- fun f 0 = "zero"
+= |   f 1 = "one";
+Warning: match nonexhaustive
+          0 => ...
+          1 => ...
+val f = fn : int -> string;
+- f 1;
+val it = "one" : string
+```
+
+#### Pattern Matching is Preferred
+The pattern matching method of function declaration is the preferred method in SML. Here are some examples of pattern matching alternatives to functions without pattern matching.
+
+```sml
+fun fact n =
+  if n = 0 then 1 else n * fact(n-1);
+fun fact 0 = 1
+|   fact n = n * fact(n-1);
+
+
+fun reverse L =
+   if null L then nil
+   else reverse(tl L) @ [hd L];
+fun reverse nil = nil
+|   reverse (first::rest) = reverse rest@[first];
+```
+
+### Local Variable Definitions
+Within functions we can define local variables, using the `let` and `in` keywords.
+
+```sml
+fun days2ms days =
+  let
+    val hours = days * 24.0
+    val minutes = hours * 60.0
+    val seconds = minutes * 60.0
+  in
+    seconds * 1000.0
+  end;
+```
+
+Functions can also be defined within a `let` block.
+
+### Sorting Examples
+
+#### Merge Sort
+```sml
+fun mergeSort nil = nil
+|   mergeSort [e] = [e]
+|   mergeSort theList =
+      let (* fun and var defined locally *)
+        fun halve nil = (nil, nil)
+        |   halve [a] = ([a], nil)
+        |   halve (a::b::cs) =
+              let  val (x, y) = halve cs
+              in  (a::x, b::y)
+              end;
+    fun merge (nil, ys) = ys
+        |   merge (xs, nil) = xs
+        |   merge (x::xs, y::ys) =
+              if (x < y) then x :: merge(xs, y::ys)
+              else y :: merge(x::xs, ys);
+    val (x, y) = halve theList
+      in
+        merge(mergeSort x, mergeSort y)
+      end;
+
+```
+#### QuickSort
+```sml
+fun split nil = (nil,nil)
+|   split [a] = ([a],nil)
+|   split [a,b] =
+    if (a <= b) then ([a],[b])
+      else ([b],[a])
+|   split (a::b::c) =
+         let
+            val (x,y) = split (a::c)
+         in
+            if (a < b) then (x, b::y)
+                        else (b::x, y)
+         end;
+
+fun quicksort nil = nil
+|   quicksort [a] = [a]
+|   quicksort a =
+        let
+            val (x,y) = split a
+        in
+            quicksort(x)@quicksort(y)
+        end;
+```
+
+## Advanced SML Functions
+
 ## Further Reference
 
 [The SML User Guide](http://www.smlnj.org/doc/FAQ/index.html)
