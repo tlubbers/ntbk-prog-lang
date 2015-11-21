@@ -4,7 +4,7 @@ Prolog is a logical language, meaning the core of prolog is the interpretation o
 
 ## Terms
 
-Everything in Prolog is built from terms:
+Everything in Prolog is built from terms:f
 - Prolog programs
 - The data manipulated by Prolog programs
 
